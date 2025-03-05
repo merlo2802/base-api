@@ -2,6 +2,8 @@ package com.cursos.api.springsecuritycourse.persistence.entity.security;
 
 import com.cursos.api.springsecuritycourse.persistence.util.RoleEnum;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +14,8 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "\"user\"")
+@Getter
+@Setter
 public class User implements UserDetails {
 
     @Id
@@ -35,7 +39,7 @@ public class User implements UserDetails {
 
         List<SimpleGrantedAuthority> authorities = role.getPermissions().stream()
                 .map(each -> each.getOperation().getName())
-                .map(each -> new SimpleGrantedAuthority(each))
+                .map(SimpleGrantedAuthority::new)
 //                .map(each -> {
 //                    String permission = each.name();
 //                    return new SimpleGrantedAuthority(permission);
@@ -76,35 +80,35 @@ public class User implements UserDetails {
         return true;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+//
+//    public Role getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(Role role) {
+//        this.role = role;
+//    }
 }
